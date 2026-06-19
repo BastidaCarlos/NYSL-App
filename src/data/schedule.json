@@ -1,0 +1,138 @@
+{
+  "locations": {
+    "katzenmaier": {
+      "name": "AJ Katzenmaier Elementary",
+      "address": "24 W. Walton St., Chicago, IL 60610",
+      "mapUrl": "https://maps.google.com/?q=24+W+Walton+St+Chicago+IL+60610"
+    },
+    "greenbay": {
+      "name": "Greenbay Elementary",
+      "address": "1734 N. Orleans St., Chicago, IL 60614",
+      "mapUrl": "https://maps.google.com/?q=1734+N+Orleans+St+Chicago+IL+60614"
+    },
+    "yeager": {
+      "name": "Howard A Yeager Elementary",
+      "address": "2245 N. Southport Ave., Chicago, IL 60614",
+      "mapUrl": "https://maps.google.com/?q=2245+N+Southport+Ave+Chicago+IL+60614"
+    },
+    "hart": {
+      "name": "Marjorie P Hart Elementary",
+      "address": "2625 N. Orchard St., Chicago, IL 60614",
+      "mapUrl": "https://maps.google.com/?q=2625+N+Orchard+St+Chicago+IL+60614"
+    },
+    "north": {
+      "name": "North Elementary",
+      "address": "1409 N. Ogden Ave., Chicago, IL 60610",
+      "mapUrl": "https://maps.google.com/?q=1409+N+Ogden+Ave+Chicago+IL+60610"
+    },
+    "south": {
+      "name": "South Elementary",
+      "address": "2101 N. Fremont St., Chicago, IL 60614",
+      "mapUrl": "https://maps.google.com/?q=2101+N+Fremont+St+Chicago+IL+60614"
+    }
+  },
+  "games": {
+    "2021_09_01_1": {
+      "date": "September 1, 2021",
+      "time": "9:30 AM",
+      "teams": "U1 vs U4",
+      "location": "katzenmaier"
+    },
+    "2021_09_01_2": {
+      "date": "September 1, 2021",
+      "time": "1:00 PM",
+      "teams": "U3 vs U2",
+      "location": "greenbay"
+    },
+    "2021_09_08_1": {
+      "date": "September 8, 2021",
+      "time": "9:30 AM",
+      "teams": "U5 vs U6",
+      "location": "yeager"
+    },
+    "2021_09_08_2": {
+      "date": "September 8, 2021",
+      "time": "1:00 PM",
+      "teams": "U6 vs U1",
+      "location": "hart"
+    },
+    "2021_09_15_1": {
+      "date": "September 15, 2021",
+      "time": "9:30 AM",
+      "teams": "U2 vs U4",
+      "location": "north"
+    },
+    "2021_09_15_2": {
+      "date": "September 15, 2021",
+      "time": "1:00 PM",
+      "teams": "U3 vs U5",
+      "location": "katzenmaier"
+    },
+    "2021_09_22_1": {
+      "date": "September 22, 2021",
+      "time": "9:30 AM",
+      "teams": "U1 vs U3",
+      "location": "south"
+    },
+    "2021_09_22_2": {
+      "date": "September 22, 2021",
+      "time": "1:00 PM",
+      "teams": "U2 vs U6",
+      "location": "yeager"
+    },
+    "2021_09_29_1": {
+      "date": "September 29, 2021",
+      "time": "9:30 AM",
+      "teams": "U4 vs U5",
+      "location": "greenbay"
+    },
+    "2021_10_06_1": {
+      "date": "October 6, 2021",
+      "time": "9:30 AM",
+      "teams": "U2 vs U5",
+      "location": "hart"
+    },
+    "2021_10_06_2": {
+      "date": "October 6, 2021",
+      "time": "1:00 PM",
+      "teams": "U1 vs U6",
+      "location": "south"
+    },
+    "2021_10_13_1": {
+      "date": "October 13, 2021",
+      "time": "9:30 AM",
+      "teams": "U3 vs U4",
+      "location": "yeager"
+    },
+    "2021_10_13_2": {
+      "date": "October 13, 2021",
+      "time": "1:00 PM",
+      "teams": "U5 vs U1",
+      "location": "greenbay"
+    },
+    "2021_10_20_1": {
+      "date": "October 20, 2021",
+      "time": "9:30 AM",
+      "teams": "U6 vs U3",
+      "location": "north"
+    },
+    "2021_10_20_2": {
+      "date": "October 20, 2021",
+      "time": "1:00 PM",
+      "teams": "U2 vs U4",
+      "location": "hart"
+    },
+    "2021_10_27_1": {
+      "date": "October 27, 2021",
+      "time": "9:30 AM",
+      "teams": "U3 vs U1",
+      "location": "katzenmaier"
+    },
+    "2021_10_27_2": {
+      "date": "October 27, 2021",
+      "time": "1:00 PM",
+      "teams": "U5 vs U6",
+      "location": "yeager"
+    }
+  }
+}
