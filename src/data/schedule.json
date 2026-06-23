@@ -3,32 +3,38 @@
     "katzenmaier": {
       "name": "AJ Katzenmaier Elementary",
       "address": "24 W. Walton St., Chicago, IL 60610",
-      "mapUrl": "https://maps.google.com/?q=24+W+Walton+St+Chicago+IL+60610"
+      "mapUrl": "https://maps.google.com/?q=24+W+Walton+St+Chicago+IL+60610",
+      "mapFrame": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2969.6542451446303!2d-87.6290504!3d41.9002924!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880fd34e07f6bac3%3A0x68a82e5d59952c86!2s24%20W%20Walton%20St%2C%20Chicago%2C%20IL%2060610%2C%20EE.%20UU.!5e0!3m2!1ses-419!2smx!4v1782183670579!5m2!1ses-419!2smx"
     },
     "greenbay": {
       "name": "Greenbay Elementary",
       "address": "1734 N. Orleans St., Chicago, IL 60614",
-      "mapUrl": "https://maps.google.com/?q=1734+N+Orleans+St+Chicago+IL+60614"
+      "mapUrl": "https://maps.google.com/?q=1734+N+Orleans+St+Chicago+IL+60614",
+      "mapFrame": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2969.0258834021975!2d-87.6378393!3d41.91380230000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880fd34073f306a3%3A0x9e1726bbf8f23f0e!2s1734%20N%20Orleans%20St%2C%20Chicago%2C%20IL%2060614%2C%20EE.%20UU.!5e0!3m2!1ses-419!2smx!4v1782183771209!5m2!1ses-419!2smx"
     },
     "yeager": {
       "name": "Howard A Yeager Elementary",
       "address": "2245 N. Southport Ave., Chicago, IL 60614",
-      "mapUrl": "https://maps.google.com/?q=2245+N+Southport+Ave+Chicago+IL+60614"
+      "mapUrl": "https://maps.google.com/?q=2245+N+Southport+Ave+Chicago+IL+60614",
+      "mapFrame": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2968.596578453403!2d-87.6628507!3d41.923030399999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880fd2e381ad8355%3A0x1764dda324ec8933!2s2245%20N%20Southport%20Ave%2C%20Chicago%2C%20IL%2060614%2C%20EE.%20UU.!5e0!3m2!1ses-419!2smx!4v1782183822081!5m2!1ses-419!2smx"
     },
     "hart": {
       "name": "Marjorie P Hart Elementary",
       "address": "2625 N. Orchard St., Chicago, IL 60614",
-      "mapUrl": "https://maps.google.com/?q=2625+N+Orchard+St+Chicago+IL+60614"
+      "mapUrl": "https://maps.google.com/?q=2625+N+Orchard+St+Chicago+IL+60614",
+      "mapFrame": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5936.5838273828385!2d-87.6458976!3d41.929578299999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880fd30f2630e551%3A0x3e719e44a5cef714!2s2625%20N%20Orchard%20St%2C%20Chicago%2C%20IL%2060614%2C%20EE.%20UU.!5e0!3m2!1ses-419!2smx!4v1782183865755!5m2!1ses-419!2smx"
     },
     "north": {
       "name": "North Elementary",
       "address": "1409 N. Ogden Ave., Chicago, IL 60610",
-      "mapUrl": "https://maps.google.com/?q=1409+N+Ogden+Ave+Chicago+IL+60610"
+      "mapUrl": "https://maps.google.com/?q=1409+N+Ogden+Ave+Chicago+IL+60610",
+      "mapFrame": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2969.6542451446303!2d-87.6290504!3d41.9002924!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880fd34e07f6bac3%3A0x68a82e5d59952c86!2s24%20W%20Walton%20St%2C%20Chicago%2C%20IL%2060610%2C%20EE.%20UU.!5e0!3m2!1ses-419!2smx!4v1782183903260!5m2!1ses-419!2smx"
     },
     "south": {
       "name": "South Elementary",
       "address": "2101 N. Fremont St., Chicago, IL 60614",
-      "mapUrl": "https://maps.google.com/?q=2101+N+Fremont+St+Chicago+IL+60614"
+      "mapUrl": "https://maps.google.com/?q=2101+N+Fremont+St+Chicago+IL+60614",
+      "mapFrame": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2968.730653686994!2d-87.65325042391325!3d41.92014857123729!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880fd31982055555%3A0xd75ba02d1635ebbf!2s2101%20N%20Fremont%20St%2C%20Chicago%2C%20IL%2060614%2C%20EE.%20UU.!5e0!3m2!1ses-419!2smx!4v1782183514792!5m2!1ses-419!2smx"
     }
   },
   "games": {
