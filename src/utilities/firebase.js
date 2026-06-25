@@ -17,16 +17,36 @@ const auth = getAuth(firebase);
 const provider = new GoogleAuthProvider();
 const db = getFirestore(firebase);
 
-export const signInWithGoogle = () => {
-    signInWithPopup(auth, provider);
+export const signInWithGoogle = async () => {
+    try {
+        return await signInWithPopup(auth, provider);
+        
+    } catch (error){
+        console.log("Error in Google Sign-In:", error);
+        throw error;
+        
+    }
+}
+
+export const signInWithEmail = async (email, password) => {
+    try {
+        const result = await signInWithEmailAndPassword(auth, email, password);
+        return result.user;
+    } catch (error) {
+        console.log("Invalid Credentials", error);
+        throw error;
+        
+    }
 };
 
-export const signInWithEmail = (email, password) => {
-    signInWithEmailAndPassword(auth, email, password);
-};
-
-export const registerWithEmail = (email, password) => {
-    createUserWithEmailAndPassword(auth, email, password);
+export const registerWithEmail = async (email, password) => {
+    try {
+        const result = await createUserWithEmailAndPassword(auth, email, password);
+        return result.user;
+    } catch (error) {
+        console.log("Invalid Credentials", error);
+        throw error;
+    }
 };
 
 const firebaseSignOut = () => signOut(auth);
