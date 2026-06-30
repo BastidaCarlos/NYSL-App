@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { signInWithEmail, signInWithGoogle, db } from "../utilities/firebase";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc } from "firebase/firestore";
+import CompleteProfile from "./CompleteProfile";
 
 const Login = () => {
 
@@ -9,6 +10,8 @@ const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const [needsProfile, setNeedsProfile] = useState(false);
+    const [userUid, setUserUid] = useState('');
 
     const handleEmailLogin = async () => {
         if (!email || !password) {
@@ -28,8 +31,25 @@ const Login = () => {
 
     const handleGoogleLogin = async () => {
         try {
-            await signInWithGoogle();
-            navigate('/');
+            const user = await signInWithGoogle();
+            const uid = user.uid; 
+            const userData = {
+                name: user.displayName,
+                email: user.email,
+                rol: '',
+                team: ''
+            }
+            const userRef = doc(db, "users", uid)
+            const userSnap = await getDoc(userRef);
+
+            if (!userSnap.exists()) {
+               await setDoc(doc(db, "users", uid), userData); 
+               setUserUid(uid);
+               setNeedsProfile(true);
+            } else {
+                navigate('/');
+            }
+
         } catch (error) {
             setError('Email already exists');
         }
@@ -37,6 +57,7 @@ const Login = () => {
 
     return (
         <section>
+            {needsProfile && <CompleteProfile uid={userUid} onComplete={() => {setNeedsProfile(false); navigate('/');}} />}
             <h1>Sign In!</h1>
             <form>
                 <label htmlFor="email">Email</label>

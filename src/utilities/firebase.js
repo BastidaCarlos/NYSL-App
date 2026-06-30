@@ -19,7 +19,8 @@ const db = getFirestore(firebase);
 
 export const signInWithGoogle = async () => {
     try {
-        return await signInWithPopup(auth, provider);
+        const result = await signInWithPopup(auth, provider);
+        return result.user;
         
     } catch (error){
         console.log("Error in Google Sign-In:", error);
