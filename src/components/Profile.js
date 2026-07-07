@@ -84,12 +84,22 @@ const Profile = () => {
             <h3>{userData?.team}</h3>
             {userData?.rol === 'familiar' && (
                 <div>
-                    <input 
-                        type="text"
-                        placeholder="New team..."
+                    <label htmlFor="team">Team</label>
+                    <select
+                        id="team"
+                        name="team"
                         value={team}
                         onChange={(e) => setTeam(e.target.value)}
-                    />
+                        disabled={isLoading}
+                    >
+                        <option value="" disabled hidden>Select a team</option>
+                        <option value="U1">U1</option>
+                        <option value="U2">U2</option>
+                        <option value="U3">U3</option>
+                        <option value="U4">U4</option>
+                        <option value="U5">U5</option>
+                        <option value="U6">U6</option>
+                    </select>
                     <button
                         onClick={handleTeamUpdate}
                         disabled={isLoading || !team}

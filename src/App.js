@@ -7,6 +7,7 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import GameDetails from "./components/GameDetails";
+import AdminPanel from "./components/AdminPanel";
 
 const App = () => (
   <BrowserRouter>
@@ -19,6 +20,7 @@ const App = () => (
           <Route path='/profile' element={<Profile />} />
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />}/>
+          <Route path='/admin' element={<AdminPanel/>} />
         </Routes>
     </div>
   </BrowserRouter>
