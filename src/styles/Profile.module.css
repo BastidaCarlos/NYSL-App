@@ -1,0 +1,191 @@
+.profileContainer {
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 2rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    box-sizing: border-box;
+}
+
+.profileHeader {
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+
+.profileMainName {
+    font-size: var(--text-4xl);
+    font-family: var(--font-title) !important;
+    color: var(--primary-color);
+    font-weight: 700;
+    margin: 0 0 0.25rem 0;
+}
+
+.profileSubBadge {
+    font-size: 0.95rem;
+    color: #5B84A8;
+    font-weight: 500;
+    margin: 0;
+}
+
+.profileCard {
+    background-color: var(--cards-color);
+    border: 1px solid var(--surface-color);
+    border-radius: 16px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.profileRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.1rem 1.25rem;
+    border-bottom: 1px solid var(--surface-color);
+    background-color: transparent;
+}
+
+.profileRow:last-child { border-bottom: none; }
+
+.rowLeft {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.fieldIcon {
+    color: #475569;
+    display: flex;
+    align-items: center;
+}
+
+.fieldLabel {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #334155;
+}
+
+.rowRight {
+    display: flex;
+    align-items: center;
+    text-align: right;
+}
+
+.fieldValue {
+    font-size: 0.95rem;
+    color: #475569;
+    font-weight: 600;
+}
+
+.changePasswordBtn {
+    background: none;
+    border: none;
+    color: #0284C7;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 0;
+    transition: color 0.2s ease;
+}
+
+.profileRowColumn {
+    display: flex;
+    flex-direction: column;
+    padding: 1.1rem 1.25rem;
+    border-bottom: 1px solid var(--surface-color);
+    background-color: transparent;
+} 
+
+.profileRowTop {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.teamEditContainer {
+    display: flex;
+    gap: 0.5rem;
+    width: 100%;
+    margin-top: 0.75rem;
+}
+
+.teamSelect {
+    flex: 1;
+    background-color: #FFF;
+    border: 1px solid #CBD5E1;
+    border-radius: var(--radius-sm);
+    padding: 0.4rem 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #0F2942;
+    outline: none;
+    cursor: pointer;
+}
+
+.saveTeamBtn {
+    background-color: var(--primary-color);
+    color: #FFF;
+    border: none;
+    border-radius: var(--radius-sm);
+    padding: 0.4rem 1.2rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.saveTeamBtn:disabled {
+    background-color: #CBD5E1;
+    color: #94A3B8;
+}
+
+.logoutButton {
+    width: 100%;
+    background-color: #F8D4D4;
+    border: 1px solid var(--alerts-color);
+    border-radius: var(--radius-md);
+    color: var(--alerts-color);
+    padding: 0.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.75rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.loaderContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 200px;
+    color: #64748B;
+}
+
+.errorText {
+    color: var(--alerts-color);
+    font-size: 0.85rem;
+    margin: 0;
+    text-align: center;
+}
+
+@media (hover: hover) {
+    .changePasswordBtn:hover {
+        color: #0369A1;
+        text-decoration: underline;
+    }
+
+    .saveTeamBtn:hover:not(:disabled) {
+        background-color: #1E3D5C;
+    }
+
+    .logoutButton:hover {
+        background-color: #FEE2E2;
+        opacity: 0.9;
+    }
+}

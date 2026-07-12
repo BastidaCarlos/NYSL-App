@@ -1,0 +1,208 @@
+.loginWrapper {
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto;
+    padding: 4rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2.2rem;
+    box-sizing: border-box;
+}
+
+.brandContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.logoPlaceholder {
+    width: 150px;
+    height: 150px;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center ;
+}
+
+.loginLogo { color: var(--primary-color); }
+
+.loginTitle {
+    font-size: var(--text-4xl);
+    color: var(--primary-color);
+    font-weight: 800;
+    margin: 0 0 0.35rem 0;
+}
+
+.loginSubtitle {
+    font-size: 0.95rem;
+    color: #475569;
+    font-weight: 600;
+    margin: 0;
+}
+
+.loginForm {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.formGroup label {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #0F2942;
+}
+
+.inputField {
+    width: 100%;
+    background-color: #F6FBFA;
+    border: 1px solid #E2E8F0;
+    border-radius: var(--radius-md);
+    padding: 0.8rem 1rem;
+    font-size: 1rem; 
+    color: #0F2942;
+    outline: none;
+    box-sizing: border-box;
+    transition: all 0.2s ease;
+}
+
+.inputField::placeholder {
+    color: #94A3B8;
+    font-style: italic;
+    opacity: 0.85;
+}
+
+.inputField:focus {
+    background-color: #FFF;
+    border-color: #0F2942;
+    box-shadow: 0 0 0 3px rgba(15, 41, 66, 0.08);
+}
+
+.forgotPasswordLink {
+    background: none;
+    border: none;
+    padding: 0;
+    font-family: inherit;
+    font-size: 0.88rem;
+    color: #0284C7;
+    font-weight: 700;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.forgotPasswordContainer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: -0.2rem;
+}
+
+.forgotPasswordLink:disabled {
+    color: #94A3B8;
+    cursor: not-allowed;
+    text-decoration: none;
+}
+
+.errorText {
+    color: var(--alerts-color);
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-align: center;
+    margin: 0.2rem 0;
+}
+
+.succesText {
+    color: var(--success-color);
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-align: center;
+    margin: 0.2rem 0;
+}
+
+.actionContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    margin-top: 0.8rem;
+}
+
+.signInBtn {
+    width: 100%;
+    background-color: var(--primary-color);
+    color: #FFF;
+    border: none;
+    border-radius: 14px;
+    padding: 0.95rem;
+    font-size: 1.2rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.googleBtn {
+   width: 100%; 
+   background-color: #FFF;
+   color: #334155;
+   border: 1px solid #CBD5E1;
+   border-radius: 14px;
+   padding: 0.85rem;
+   font-size: 1rem;
+   font-weight: 600;
+   cursor: pointer;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   gap: 0.6rem;
+   transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.googleIcon { flex-shrink: 0; }
+
+.createAccountBtn {
+    width: 100%;
+    background-color: #FFF;
+    color: var(--accent-color);
+    border: 2px solid var(--accent-color);
+    border-radius: 14px;
+    padding: 0.85rem;
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-align: center;
+    text-decoration: none;
+    box-sizing: border-box;
+    transition: all 0.2s ease;
+}
+
+.signInBtn:disabled, .googleBtn:disabled {
+    background-color: #E2E8F0;
+    border-color: #E2E8F0;
+    color: #94A3B8;
+    cursor: not-allowed;
+}
+
+@media (hover: hover) {
+    .forgotPasswordLink:hover:not(:disabled) {
+        text-decoration: underline;
+        color: #0369A1;
+    }
+
+    .signInBtn:hover:not(:disabled) {
+        background-color: #17406A;
+    }
+
+    .googleBtn:hover:not(:disabled) {
+        background-color: #F8FAFC;
+        border-color: #94A3B8;
+    }
+
+    .createAccountBtn:hover {
+        background-color: #F0FDF4;
+        border-color: #16A34A;
+        color: #16A34A;
+    }
+}

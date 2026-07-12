@@ -1,0 +1,102 @@
+.boardSection {
+    background-color: var(--cards-color);
+    border: 1px solid var(--surface-color);
+    border-radius: 16px;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.boardTitle {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin: 0;
+    font-weight: 700;
+}
+
+.messagesContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    max-height: 250px;
+    overflow-y: auto;
+    padding-right: 0.25rem;
+}
+
+.messageGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.authorName {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #334155;
+    padding-left: 0.25rem;
+}
+
+.messageBubble {
+    background-color: #E0E5E5;
+    padding: 0.6rem 1rem;
+    border-radius: var(--radius-md); 
+    width: fit-content;
+    max-width: 85%;
+}
+
+.messageText {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #1E293B;
+}
+
+.inputArea {
+    margin-top: 0.5rem;
+    border-top: 1px solid var(--surface-color);
+    padding-top: 0.85rem;
+}
+
+.inputWrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: #FFF;
+    border: 1px solid #CBD5E1;
+    border-radius: 10px;
+    padding: 0.25rem 0.5rem;
+}
+
+.messageInput {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.sendBtn {
+    background-color: var(--accent-color);
+    color: #FFF;
+    border: none;
+    border-radius: var(--radius-sm);
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.loginDisclaimer {
+    font-size: 0.875rem;
+    color: #64748B;
+    text-align: center;
+    margin: 0;
+}
+
+.errorText {
+    color: var(--alerts-color);
+    font-size: 0.875rem;
+    margin: 0;
+}

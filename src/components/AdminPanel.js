@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 import AdminGames from "./AdminGames";
 import AdminUsers from "./AdminUsers";
 import AdminAnnouncements from "./AdminAnnouncements";
+// Import Styles
+import style from '../styles/AdminPanel.module.css'
 
 const AdminPanel = () => {
     const [isAdmin, setIsAdmin] = useState(false);
@@ -46,37 +48,57 @@ const AdminPanel = () => {
             } 
         }
         fetchUser();
-    }, [user])
+    }, [user, loading, navigate])
 
-    if (isLoading) return <p>Loading admin panel...</p>;
+    if (isLoading) {
+        return (
+            <div className={style.loadignContainer}>
+                <div className={style.spinner}></div>
+                <p>Loading Admin Dashboard</p>
+            </div>
+        );
+    }
+
     if (!isAdmin) return null;
 
     return (
-        <section>
-            <div>
-                <button 
+        <section className={style.adminContainer}>
+            <div className={style.headerSection}>
+                <h1 className={style.adminTitle}>Admin Dashboard</h1>
+                <p className={style.adminSubtitle}>Manage league operations and content</p>
+                {error && <p className={style.errorBadge}>{error}</p>}
+            </div>
+
+            <nav className={style.tabContainer}>
+                <button
+                    className={`${style.tabBtn} ${activeTab === 'games' ? style.activeTab : ''}`}
                     onClick={() => setActiveTab('games')}
                     disabled={activeTab === 'games'}
                 >
                     Games
                 </button>
-                <button 
+
+                <button
+                    className={`${style.tabBtn} ${activeTab === 'announcements' ? style.activeTab : ''}`}
+                    onClick={() => setActiveTab('announcements')}
+                    disabled={activeTab === 'announcements'}
+                >
+                    News
+                </button>
+
+                <button
+                    className={`${style.tabBtn} ${activeTab === 'users' ? style.activeTab : ''}`}
                     onClick={() => setActiveTab('users')}
                     disabled={activeTab === 'users'}
                 >
                     Users
                 </button>
-                <button 
-                    onClick={() => setActiveTab('announcements')}
-                    disabled={activeTab === 'announcements'}
-                >
-                    Announcements
-                </button>
-            </div>
-            <div>
-                {activeTab === 'games' && <AdminGames /> }        
-                {activeTab === 'users' && <AdminUsers /> }        
-                {activeTab === 'announcements' && <AdminAnnouncements /> }        
+            </nav>
+
+            <div className={style.contentArea}>
+                {activeTab === 'games' && <AdminGames />}
+                {activeTab === 'announcements' && <AdminAnnouncements />}
+                {activeTab === 'users' && <AdminUsers />}
             </div>
         </section>
     )

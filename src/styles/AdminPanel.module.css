@@ -1,0 +1,115 @@
+.adminContainer {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 2rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    box-sizing: border-box;
+}
+
+.headerSection {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    text-align: center;
+}
+
+.adminTitle {
+    font-size: 1.85rem;
+    color: var(--primary-color);
+    font-weight: 800;
+    margin: 0;
+}
+
+.adminSubtitle {
+    font-size: 0.95rem;
+    color: #475569;
+    font-weight: 500;
+    margin: 0;
+}
+
+.tabContainer {
+    display: flex;
+    background-color: #F8FAFC;
+    border: 1px solid var(--surface-color);
+    border-radius: var(--radius-md);
+    padding: 0.35rem;
+    gap: 0.35rem;
+}
+
+.tabBtn {
+    flex: 1;
+    background-color: transparent;
+    border: none;
+    border-radius: var(--radius-sm);
+    padding: 0.75rem 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.activeTab {
+    background-color: var(--primary-color) !important;
+    color: #FFF !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    cursor: default;
+}
+
+.contentArea {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.loadingContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 50vh;
+    color: #0F2942;
+    font-weight: 600;
+    gap: 1rem;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #E2E8F0;
+    border-top: 4px solid #0284C7;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+.errorBadge {
+    background-color: #FEE2E2;
+    color: var(--alerts-color);
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.85rem;
+    font-weight: 600;
+    display: inline-block;
+    margin-top: 0.5rem;
+}
+
+@keyframes fadeIn {
+   from { opacity: 0; transform: translateY(5px);} 
+   to { opacity: 1; transform: translateY(0);} 
+}
+
+@keyframes spin {
+   0% { transform: rotate(0deg); } 
+   100% { transform: rotate(360deg); } 
+}
+
+@media (hover: hover) {
+    .tabBtn:hover:not(:disabled) {
+        color: #64748B;
+        background-color: #E2E8F0;
+    }
+}

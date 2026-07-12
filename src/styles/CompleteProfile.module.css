@@ -1,0 +1,118 @@
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(15, 41, 66, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    padding: 1.5rem;
+    box-sizing: border-box;
+    backdrop-filter: blur(12px);
+}
+
+.modalCard {
+    background-color: #F4F9FA;
+    border-radius: var(--radius-lg);
+    padding: 2rem 1.75rem;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    animation: slideUp 0.3s ease-out forwards;
+}
+
+.modalTitle {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    font-weight: 800;
+    margin: 0;
+    text-align: center;
+}
+
+.modalSubtitle {
+    font-size: 0.9rem;
+    color: #475569;
+    text-align: center;
+    margin: -0.8rem 0 0.5rem 0;
+}
+
+.modalForm {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+}
+
+.formGroup label {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #0F2942;
+}
+
+.selectField {
+    width: 100%;
+    background-color: #FFF;
+    border: 1px solid #E2E8F0;
+    border-radius: 10px;
+    padding: 0.7rem 0.85rem;
+    font-size: 0.95rem;
+    color: #334155;
+    outline: none;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease;
+}
+
+.selectField:focus {
+    border-color: #0F2942;
+    box-shadow: 0 0 0 2px rgba(15, 41, 66, 0.1);
+}
+
+.errorText {
+    color: var(--alerts-color);
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-align: center;
+    margin: 0;
+}
+
+.submitBtn {
+    width: 100%;
+    background-color: #0F2942;
+    color: #FFF;
+    border: none;
+    border-radius: 14px;
+    padding: 0.9rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 0.5rem;
+    transition: background-color 0.2s ease;
+}
+
+.submitBtn:disabled {
+    background-color: #CBD5E1;
+    color: #94A4B8;
+    cursor: not-allowed;
+}
+
+@keyframes slideUp {
+   from {
+    opacity: 0;
+    transform: translateY(20px);
+   } 
+   to {
+    opacity: 1;
+    transform: translateY(0);
+   }
+}
+
+@media (hover: hover) {
+   .submitBtn:hover:not(:disabled) {
+    background-color: #1A3E61;
+   } 
+}

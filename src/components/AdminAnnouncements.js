@@ -1,6 +1,9 @@
-import { useState, useEffect } from "react";
+import { Fragment, useState, useEffect } from "react";
 import { doc, getDocs, addDoc, updateDoc, deleteDoc, collection, onSnapshot, query, orderBy, serverTimestamp } from "firebase/firestore";
 import { db } from "../utilities/firebase";
+// Import Styles
+import style from '../styles/AdminSubcomponents.module.css'
+import { BellRing, Clock, Info } from "lucide-react";
 
 const AdminAnnouncements = () => {
     const [announcements, setAnnouncements] = useState([]);
@@ -172,51 +175,80 @@ const AdminAnnouncements = () => {
         setError('');
     }
 
+    const getSelectedGame = (games, gameId) => games.find(game => game.id === gameId);
+
     return (
         <div>
             <section>
-                <form
-                    onSubmit={handleSubmit}
-                >
-                    <label htmlFor="type">Announcement Type</label>
-                    <select
-                        id="type"
-                        name="type"
-                        value={form.type}
-                        onChange={handleChange}
-                        disabled={isLoading}
-                    >
-                        <option value={''} disabled hidden>Announcement type</option>
-                        <option value={'Canceled'}>Canceled</option>
-                        <option value={'Delayed'}>Delayed</option>
-                        <option value={'Event'}>Event</option>
-                    </select>
-                    <label htmlFor="gameId">Select a game</label>
-                    <select
-                        id="gameId"
-                        name="gameId"
-                        value={form.gameId}
-                        disabled={isLoading}
-                        onChange={handleGameSelect}
-                    >
-                        <option value={''} disabled hidden>Select a Game</option>
-                        { games.map(game => (
-                            <option key={game.gameId} value={game.id}>{game.homeTeam} vs {game.awayTeam}</option>
-                        ))}
-                    </select>
+                <form className={style.formCard} onSubmit={handleSubmit}>
+                    <div className={style.formGroup}>
+                        <label htmlFor="type">Announcement Type</label>
+                        <select
+                            id="type"
+                            name="type"
+                            className={style.inputField}
+                            value={form.type}
+                            onChange={handleChange}
+                            disabled={isLoading}
+                        >
+                            <option value={''} disabled hidden>Announcement type</option>
+                            <option value={'Canceled'}>Canceled</option>
+                            <option value={'Delayed'}>Delayed</option>
+                            <option value={'Event'}>Event</option>
+                        </select>
+                    </div>
+
+                    <div className={style.formGroup}>
+                        <label htmlFor="gameId">Select a game</label>
+                        <select
+                            id="gameId"
+                            name="gameId"
+                            className={style.inputField}
+                            value={form.gameId}
+                            onChange={handleGameSelect}
+                            disabled={isLoading}
+                        >
+                            <option value={''} disabled hidden>Select a Game</option>
+                            {games.map(game => (
+                                <option key={game.gameId} value={game.id}>{game.homeTeam} vs {game.awayTeam}</option>
+                            ))}
+                        </select>
+                    </div>
                     {form.gameId && (
-                        <div>
-                            <p>Game Selected:</p>
-                            <p>{form.homeTeam} vs {form.awayTeam}</p>
+                        <div className={style.formGroup}>
+                            {(() => {
+                                const selectedGame = getSelectedGame(games, form.gameId);
+                                    if (!selectedGame) return null;
+            
+                                    return (
+                                    <div className={style.formGroup}>
+                                        <p className={style.cardText}>
+                                            <strong>Game Selected:</strong> {selectedGame.homeTeam} vs {selectedGame.awayTeam}
+                                        </p>
+                                        <p className={style.cardText}>
+                                            <strong>Date:</strong> {
+                                                selectedGame.date?.toDate?.() 
+                                                ? selectedGame.date.toDate().toLocaleDateString('en-US', {
+                                                weekday: 'short', 
+                                                month: 'short', 
+                                                day: 'numeric'
+                                                })
+                                                : 'Date not available'
+                                            }
+                                        </p>
+                                    </div>
+                                    );
+                            })()}
                         </div>
                     )}
                     {(form.type === 'Delayed' || form.type === 'Canceled') && (
-                        <div>
+                        <div className={style.formGroup}>
                             <label htmlFor="reason">Reason</label>
                             <input
                                 id="reason"
                                 name="reason"
                                 type="text"
+                                className={style.inputField}
                                 placeholder="Reason..."
                                 value={form.reason}
                                 disabled={isLoading}
@@ -224,13 +256,15 @@ const AdminAnnouncements = () => {
                             />
                         </div>
                     )}
+
                     {form.type === 'Event' && (
-                        <div>
+                        <div className={style.formGroup}>
                             <label htmlFor="title">Event Title</label>
                             <input
                                 type="text"
                                 id="title"
                                 name="title"
+                                className={style.inputField}
                                 value={form.title}
                                 disabled={isLoading}
                                 onChange={handleChange}
@@ -238,65 +272,109 @@ const AdminAnnouncements = () => {
                             />
                         </div>
                     )}
+
                     {form.type === 'Delayed' && (
-                        <div>
-                            <label htmlFor="newDate">New Date:</label>
-                            <input 
-                                type="date"
-                                id="newDate"
-                                name="newDate"
-                                value={form.newDate}
-                                disabled={isLoading}
-                                onChange={handleChange}
-                            />
-                            <label htmlFor="newTime">New Time:</label>
-                            <input 
-                                type="time"
-                                id="newTime"
-                                name="newTime"
-                                value={form.newTime}
-                                disabled={isLoading}
-                                onChange={handleChange}
-                            />
-                        </div>
+                        <>
+                            <div className={style.formGroup}>
+                                <label htmlFor="newDate">New Date:</label>
+                                <input 
+                                    type="date"
+                                    id="newDate"
+                                    name="newDate"
+                                    className={style.inputField}
+                                    value={form.newDate}
+                                    disabled={isLoading}
+                                    onChange={handleChange}
+                                />
+                            </div>
+                            <div className={style.formGroup}>
+                                <label htmlFor="newTime">New Time:</label>
+                                <input 
+                                    type="time"
+                                    id="newTime"
+                                    name="newTime"
+                                    className={style.inputField}
+                                    value={form.newTime}
+                                    disabled={isLoading}
+                                    onChange={handleChange}
+                                />
+                            </div>
+                        </>
                     )} 
-                    <button disabled={isLoading}>
-                        {
-                            isLoading
-                            ? (editingAnnouncement !== null ? 'Updating Announcement...' : 'Creating Announcement...')
-                            : (editingAnnouncement !== null ? 'Update Announcement' : 'Create Announcement')
-                        }
-                    </button>
-                    {
-                        editingAnnouncement !== null && (
-                            <button type="button" onClick={handleCancelEdit}>
+                    
+                    <div className={style.btnContainer}>
+                        <button className={style.primaryBtn} disabled={isLoading}>
+                            {isLoading
+                                ? (editingAnnouncement !== null ? 'Updating...' : 'Creating...')
+                                : (editingAnnouncement !== null ? 'Update Announcement' : 'Create Announcement')
+                            }
+                        </button>
+                        {editingAnnouncement !== null && (
+                            <button type="button" className={style.dangerBtn} onClick={handleCancelEdit}>
                                 Cancel
                             </button>
-                        )
-                    } 
+                        )} 
+                    </div>
                 </form>
             </section>
-            <section>
-                {announcements.map(announcement => {
-                    return (
-                        <article key={announcement.id}>
-                            <h3>{announcement.type} Game {announcement.homeTeam} vs {announcement.awayTeam}</h3>
-                            <p>{announcement.reason}</p>
-                            { announcement.type === 'Delayed' && (
-                                <div>
-                                    <p>New Date: {announcement.newDate}</p>
-                                    <p>New Time: {announcement.newTime}</p>
+            <section className={style.listSection}>
+                <h2 className={style.sectionTitle}>Recent Announcements</h2>
+                {announcements.map(announcement => (
+                    <Fragment key={announcement.id}>
+                        {announcement.type === 'Canceled' && (
+                            <article className={`${style.announcementCard} ${style.announcementCanceledCard}`}>
+                                <div className={style.announcementHeader}>
+                                    <span className={style.canceledIcon}><BellRing /></span>
+                                    <h3 className={style.canceledTitleCard}>{announcement.type} {announcement.homeTeam} VS {announcement.awayTeam}</h3>
                                 </div>
-                            ) }
-                            <button onClick={() => handleEdit(announcement)}>Edit</button>
-                            <button onClick={() => handleDelete(announcement.id)}>Delete</button>
-                        </article>
-                    )
-                })}
+                                <div className={style.announcementBody}>
+                                    <p className={style.announcementReason}>{announcement.reason}</p>
+                                </div>
+                                <div className={style.btnContainer}>
+                                    <button className={style.secondaryBtn} onClick={() => handleEdit(announcement)}>Edit</button>
+                                    <button className={style.dangerBtn} onClick={() => handleDelete(announcement.id)}>Delete</button>
+                                </div>
+                            </article>
+                        )}
+                        {announcement.type === 'Delayed' && (
+                            <article className={`${style.announcementCard} ${style.announcementDelayedCard}`}>
+                                <div className={style.announcementHeader}>
+                                    <span className={style.delayedIcon}><Clock /></span>
+                                    <h3 className={style.delayedTitleCard}>{announcement.type} {announcement.homeTeam} VS {announcement.awayTeam}</h3>
+                                </div>
+                                <div className={style.announcementBody}>
+                                    <p className={style.announcementReason}>{announcement.reason}</p>
+                                    <p className={style.announcementNewDates}>{announcement.newDate} {announcement.newTime}</p>
+                                </div>
+                                <div className={style.btnContainer}>
+                                    <button className={style.secondaryBtn} onClick={() => handleEdit(announcement)}>Edit</button>
+                                    <button className={style.dangerBtn} onClick={() => handleDelete(announcement.id)}>Delete</button>
+                                </div>
+                            </article>
+                        )}
+                        {announcement.type === 'Event' && (
+                            <article className={`${style.announcementCard} ${style.announcementEventCard}`}>
+                                <div className={style.announcementHeader}>
+                                    <span className={style.eventIcon}><Info /></span>
+                                    <h3 className={style.eventTitleCard}> {announcement.type} {announcement.homeTeam} VS {announcement.awayTeam}</h3>
+                                </div>
+                                <div className={style.announcementBody}>
+                                    <p className={style.announcementEventTitle}>{announcement.title}</p>
+                                </div>
+                                <div className={style.btnContainer}>
+                                    <button className={style.secondaryBtn} onClick={() => handleEdit(announcement)}>Edit</button>
+                                    <button className={style.dangerBtn} onClick={() => handleDelete(announcement.id)}>Delete</button>
+                                </div>
+                            </article>
+                        )}
+                    </Fragment>
+                ))}
+                {announcements.length === 0 && !isLoading && <p className={style.announcementDisclaimer}>No announcements at this time</p>}
             </section>
+            
             <section>
-                {isLoading && <p>Loading...</p>}
-                {error && <p>{error}</p>}
+                {isLoading && <p className={style.infoText}>Loading...</p>}
+                {error && <p className={style.errorText}>{error}</p>}
             </section>
         </div>
     )

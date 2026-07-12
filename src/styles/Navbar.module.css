@@ -1,0 +1,78 @@
+/* Overwrite Navbar */
+.navbarCustom {
+    background-color: var(--primary-color);
+    padding: 1rem;
+    min-height: 60px;
+    z-index: 1000 !important;
+}
+
+.navLinks {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    gap: 0.25rem;
+}
+
+.navItem {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.navLink {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    padding: 0.25rem 0.5rem;
+    transition: all 0.2s ease;
+    position: relative;
+    min-width: 44px;
+    min-height: 44px;
+    background: none;
+    border: none;
+    font-size: var(--text-sm);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+@media (hover: hover) {
+    .navLink:hover {
+        color: #FF9F59;
+        transform: translateY(-2px);
+    }
+}
+
+.navLink.active {
+    color: #FF6B00;
+    font-weight: 700;
+}
+
+.navLink.active::after {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 18px;
+    height: 2.5px;
+    background: #FF6B00;
+    border-radius: 0 0 3px 3px;
+}
+
+.navIcon {
+    font-size: 1.25rem !important;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease;
+}
+
+.navLink.active .navIcon { transform: scale(1.05) !important; }

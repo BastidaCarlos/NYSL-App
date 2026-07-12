@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import { collection, setDoc, updateDoc, deleteDoc, doc, onSnapshot, query, orderBy, getDocs, Timestamp, where } from "firebase/firestore";
 import { db } from "../utilities/firebase";
+// Import Styles and Icons
+import style from '../styles/AdminSubcomponents.module.css'
+import { Calendar1, MapPin } from "lucide-react";
 
 const AdminGames = () => {
     const [games, setGames] = useState([]);
@@ -175,124 +178,190 @@ const AdminGames = () => {
     }
 
     return (
-        <div>
+        <div> 
             <section>
-                <form onSubmit={handleSubmit}>
-                    <label htmlFor="homeTeam">Home Team:</label>
-                    <select
-                        id="homeTeam"
-                        name="homeTeam"
-                        value={form.homeTeam}
-                        disabled={isLoading}
-                        onChange={handleChange}
-                    >
-                        <option value={''} disabled hidden>Select a Team</option>
-                        <option value={'U1'}>U1</option>
-                        <option value={'U2'}>U2</option>
-                        <option value={'U3'}>U3</option>
-                        <option value={'U4'}>U4</option>
-                        <option value={'U5'}>U5</option>
-                        <option value={'U6'}>U6</option>
-                    </select>
-                    <label htmlFor="awayTeam">Away Team:</label>
-                    <select
-                        id="awayTeam"
-                        name="awayTeam"
-                        value={form.awayTeam}
-                        disabled={isLoading}
-                        onChange={handleChange}
-                    >
-                        <option value={''} disabled hidden>Select a Team</option>
-                        <option value={'U1'}>U1</option>
-                        <option value={'U2'}>U2</option>
-                        <option value={'U3'}>U3</option>
-                        <option value={'U4'}>U4</option>
-                        <option value={'U5'}>U5</option>
-                        <option value={'U6'}>U6</option>
-                    </select>
-                    <label htmlFor="date">Date:</label>
-                    <input 
-                        type="date"
-                        name="date"
-                        value={form.date}
-                        onChange={handleChange}
-                        disabled={isLoading}
-                    />
-                    <label htmlFor="time">Time:</label>
-                    <input 
-                        type="time"
-                        name="time"
-                        value={form.time}
-                        onChange={handleChange}
-                        disabled={isLoading}
-                    />
-                    <label htmlFor="sequence">Sequence:</label>
-                    <input 
-                        type="number"
-                        min={"1"}
-                        max={"9"}
-                        name="sequence"
-                        value={form.sequence}
-                        onChange={handleChange}
-                        disabled={isLoading}
-                    />
-                    <label htmlFor="location">Location</label>
-                    <select 
-                        id="location"
-                        name="locationId"
-                        value={form.locationId}
-                        onChange={handleChange}
-                    >
-                        <option value={''} disabled hidden>Select a Location</option>
+                <form className={style.formCard} onSubmit={handleSubmit}>
+                    <div className={style.formGroup}>
+                        <label htmlFor="homeTeam">Home Team:</label>
+                        <select
+                            id="homeTeam"
+                            name="homeTeam"
+                            className={style.inputField}
+                            value={form.homeTeam}
+                            disabled={isLoading}
+                            onChange={handleChange}
+                        >
+                            <option value={''} disabled hidden>Select a team</option>
+                            <option value={'U1'}>U1</option>
+                            <option value={'U2'}>U2</option>
+                            <option value={'U3'}>U3</option>
+                            <option value={'U4'}>U4</option>
+                            <option value={'U5'}>U5</option>
+                            <option value={'U6'}>U6</option>
+                        </select>
+                    </div>
+
+                    <div className={style.formGroup}>
+                        <label htmlFor="awayTeam">Away Team:</label>
+                        <select
+                            id="awayTeam"
+                            name="awayTeam"
+                            className={style.inputField}
+                            value={form.awayTeam}
+                            disabled={isLoading}
+                            onChange={handleChange}
+                        >
+                            <option value={''} disabled hidden>Select a team</option>
+                            <option value={'U1'}>U1</option>
+                            <option value={'U2'}>U2</option>
+                            <option value={'U3'}>U3</option>
+                            <option value={'U4'}>U4</option>
+                            <option value={'U5'}>U5</option>
+                            <option value={'U6'}>U6</option>
+                        </select>
+                    </div>
+
+                    <div className={style.formGroup}>
+                        <label htmlFor="date">Date:</label>
+                        <input 
+                            id="date"
+                            type="date"
+                            name="date"
+                            className={style.inputField}
+                            value={form.date}
+                            onChange={handleChange}
+                            disabled={isLoading}
+                        />
+                    </div>
+
+                    <div className={style.formGroup}>
+                        <label htmlFor="time">Time:</label>
+                        <input 
+                            id="time"
+                            type="time"
+                            name="time"
+                            className={style.inputField}
+                            value={form.time}
+                            onChange={handleChange}
+                            disabled={isLoading}
+                        />
+                    </div>
+
+                    <div className={style.formGroup}>
+                        <label htmlFor="sequence">Sequence:</label>
+                        <input 
+                            id="sequence"
+                            type="number"
+                            min={"1"}
+                            max={"9"}
+                            name="sequence"
+                            className={style.inputField}
+                            value={form.sequence}
+                            onChange={handleChange}
+                            disabled={isLoading}
+                        />
+                    </div>
+
+                    <div className={style.formGroup}>
+                        <label htmlFor="location">Location</label>
+                        <select
+                            id="location"
+                            name="location"
+                            className={style.inputField}
+                            value={form.locationId}
+                            onChange={handleChange}
+                            disabled={isLoading}
+                        >
+                            <option value={''} disabled hidden>Select a Location</option>
                             {locations.map(location => (
                                 <option key={location.id} value={location.id}>{location.name}</option>
-                        ))}
-                    </select>
-                    <label htmlFor="referee">Referee</label>
-                    <select 
-                        id="referee"
-                        name="refereeId"
-                        value={form.refereeId}
-                        onChange={handleChange}
-                    >
-                        <option value={''} disabled hidden>Select a Referee</option>
+                            ))}
+                        </select>
+                    </div>
+                    
+                    <div className={style.formGroup}>
+                        <label htmlFor="referee">Referee</label>
+                        <select
+                            id="referee"
+                            name="referee"
+                            className={style.inputField}
+                            value={form.refereeId}
+                            onChange={handleChange}
+                        >
+                            <option value={''} disabled hidden>Select a Referee</option>
                             {referees.map(referee => (
                                 <option key={referee.id} value={referee.id}>{referee.name}</option>
-                        ))}
-                    </select>
-                    <button disabled={isLoading}>
-                        {
-                            isLoading
-                            ? (editingGame !== null ? 'Updating Game...' : 'Creating Game...')
-                            : (editingGame !== null ? 'Update Game' : 'Create Game')
-                        }
-                    </button>
-                    {
-                        editingGame !== null && (
-                            <button type="button" onClick={handleCancelEdit}>
+                            ))}
+                        </select>
+                    </div>
+
+                    <div className={style.btnContainer}>
+                        <button className={style.primaryBtn} disabled={isLoading}>
+                            {isLoading
+                                ? (editingGame !== null ? 'Updating Game...' : 'Creating Game...')
+                                : (editingGame !== null ? 'Update Game' : 'Create Game')
+                            }
+                        </button>
+                        {editingGame !== null && (
+                            <button type="button" className={style.dangerBtn} onClick={handleCancelEdit}>
                                 Cancel
                             </button>
-                        )
-                    }
+                        )}
+                    </div>
                 </form>
             </section>
-            <section>
-                <h2>Game List</h2>
-                { games.map((game) => {
-                    return (
-                        <article key={game.id}>
-                            <h2>{game.homeTeam} vs {game.awayTeam}</h2>
-                            <p>Date: {game.date.toDate().toLocaleDateString()}</p>
-                            <p>{game.time}</p>
-                            <p>Location: {locations.find(location => location.id === game.locationId)?.name}</p>
-                            <button type="button" onClick={() => handleEdit(game)}>Edit</button>
-                            <button type="button" onClick={() => handleDelete(game.id)}>Delete</button>
-                        </article>
-                    )
-                })}
+            <section className={style.listSection}>
+                <h2 className={style.sectionTitle}>Game List</h2> 
+                {isLoading && <p className={style.statusText}>Loading schedule...</p>}
+                {error && <p className={style.errorText}>{error}</p>}
+
+                {!isLoading && games.length === 0 && (
+                    <p className={style.noGamesText}>No games Schedule for your profile</p>
+                )}
+
+                {!isLoading && games.map(game => (
+                    <article className={style.gameCard} key={game.id}>
+                        <h2 className={style.gameCardTitle}>
+                            {game.homeTeam} vs {game.awayTeam}
+                        </h2>
+
+                        <div className={style.gameInfoRow}>
+                            <span className={style.infoIcon}><Calendar1 size={24}/></span>
+                            <p className={style.infoText}>
+                                {game.date?.toDate().toLocaleString('en-US', { weekday: 'short', month: 'short', day: 'numeric'})} {game.time}
+                            </p>
+                        </div>
+
+                        <div className={style.gameInfoRow}>
+                            <span className={style.infoIcon}><MapPin size={24}/></span>
+                            <div className={style.locationTextGroup}>
+                                <p className={style.infoText}><strong>{locations.find(location => location.id === game.locationId)?.name}</strong></p>
+                                <p className={style.addressText}>{locations.find(location => location.id === game.locationId)?.address}</p>
+                            </div>
+                        </div>
+                        <div className={style.btnContainer}>
+                            <button
+                                type="submit"
+                                className={style.secondaryBtn}
+                                disabled={isLoading}
+                                onClick={() => handleEdit(game)}
+                            >
+                                Edit
+                            </button>
+                            <button
+                                type="submit"
+                                className={style.dangerBtn}
+                                disabled={isLoading}
+                                onClick={() => handleDelete(game.id)}
+                            >
+                                Delete
+                            </button>
+                        </div>
+                    </article>
+                ))}
             </section>
-            { isLoading && <p>Loading...</p>}
-            { error && <p>{error}</p>}
+            {isLoading && <p className={style.statusTextText}>Loading...</p>}
+            {error && <p className={style.errorText}>{error}</p>}
         </div>
     )
 }

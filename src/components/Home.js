@@ -1,41 +1,29 @@
-import { useState, useEffect } from "react";
+import { Fragment, useState, useEffect } from "react";
 import { db } from "../utilities/firebase";
 import { collection, query, orderBy, onSnapshot, getDocs, where, Timestamp } from "firebase/firestore";
 import { Link } from "react-router-dom";
+// Import Styles and Icons
+import style from '../styles/Home.module.css'
+import { BellRing, Clock, Info, Calendar1, MapPin, ArrowRight } from "lucide-react";
 
 const TeamButton = ({team, setTeam, checked}) => (
-    <>
-        <input
-            type="radio"
-            id={team}
-            className="btn-check"
-            autoComplete="off"
-            checked={checked}
-            onChange={() => setTeam(team === 'All' ? null : team)}
-        />
-        <label
-            className="btn-team btn btn-outline-primary px-4 py-2 rounded-pill fw-medium transition-all shadow-sm"
-            htmlFor={team}
-        >
-            { team }
-        </label>
-    </>
+    <button
+        type="button"
+        className={`${style.filterPill} ${checked ? style.activePill : ''}`}
+        onClick={() => setTeam(team === 'All' ? null : team)}
+    >
+        {team}
+    </button>
 )
 
 const Home = () => {
     const [announcements, setAnnouncements] = useState([]);
     const [upcomingGames, setUpcomingGames] = useState([]);
     const [selectedTeam, setSelectedTeam] = useState(null);
+    const [isLoadingGames, setIsLoadingGames] = useState(true);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState('');
-    const teamList = [
-        "U1",
-        "U2",
-        "U3",
-        "U4",
-        "U5",
-        "U6"
-    ];
+    const teamList = [ "U1", "U2", "U3", "U4", "U5", "U6" ];
 
     useEffect(() => {
         const announcementRef = collection(db, 'announcements')
@@ -72,7 +60,7 @@ const Home = () => {
                 orderBy('date')
             );
 
-            setIsLoading(true);
+            setIsLoadingGames(true);
             try {
                 const [gamesSnap, locationsSnap] = await Promise.all([
                     getDocs(gamesQuery),
@@ -98,10 +86,9 @@ const Home = () => {
 
                 setUpcomingGames(fullGamesList);
             } catch (error) {
-                console.error("Real Error for firebase: ", error)
-               setError('Error to connect Firestore') 
+               setError('Error connecting to Firestore') 
             } finally {
-                setIsLoading(false);
+                setIsLoadingGames(false);
             }
         }
         fetchData();
@@ -112,29 +99,57 @@ const Home = () => {
         : upcomingGames;
 
     return (
-        <div className="container py-4 d-flex flex-column gap-2">
-
-            <div className="text-center mb-4">
-                <h1 className="fw-bold">NYSL Fall Season</h1>
-                <p className="text-muted">North Youth Soccer League</p>
+        <div className={style.mainContainer}>
+            <div className={style.headerContainer}>
+                <h1 className={style.homeTitle}>Fall Season</h1>
+                <p className={style.homeSubtitle}>North Youth Soccer League</p>
             </div>
 
-            <h2>Announcements</h2>
-            {announcements.map(announcement => (
-                <div className="card" key={announcement.id}>
-                    <div className="card-header">
-                        <h3>{announcement.type}</h3> 
-                        {announcement.homeTeam} VS {announcement.awayTeam}
-                        {(announcement.type === 'Canceled' || announcement.type === 'Delayed') && <p>{announcement.reason}</p>}
-                        {announcement.type === 'Delayed' && <p>{announcement.newDate} {announcement.newTime}</p>}
-                        {announcement.type === 'Event' && <p>{announcement.title}</p>}
-                    </div>
-                </div>
-            ))}
-            {announcements.length === 0 && !isLoading && <p>No announcements at this time</p>}
-            <section>
-                <h3 className="mb-3">Filter by Team</h3>
-                <div className="d-flex flex-wrap gap-2 mb-4">
+            <h2 className={style.announcementTitle}>Announcements</h2>
+            <section className={style.announcementSection}>
+                {announcements.map(announcement => (
+                    <Fragment key={announcement.id}>
+                        {announcement.type === 'Canceled' && (
+                            <article className={`${style.announcementCard} ${style.announcementCanceledCard}`}>
+                                <div className={style.announcementHeader}>
+                                    <span className={style.canceledIcon}><BellRing /></span>
+                                    <h3 className={style.canceledTitleCard}>{announcement.type} {announcement.homeTeam} VS {announcement.awayTeam}</h3>
+                                </div>
+                                <div className={style.announcementBody}>
+                                    <p className={style.announcementReason}>{announcement.reason}</p>
+                                </div>
+                            </article>
+                        )}
+                        {announcement.type === 'Delayed' && (
+                            <article className={`${style.announcementCard} ${style.announcementDelayedCard}`}>
+                                <div className={style.announcementHeader}>
+                                    <span className={style.delayedIcon}><Clock /></span>
+                                    <h3 className={style.delayedTitleCard}>{announcement.type} {announcement.homeTeam} VS {announcement.awayTeam}</h3>
+                                </div>
+                                <div className={style.announcementBody}>
+                                    <p className={style.announcementReason}>{announcement.reason}</p>
+                                    <p className={style.announcementNewDates}>{announcement.newDate} {announcement.newTime}</p>
+                                </div>
+                            </article>
+                        )}
+                        {announcement.type === 'Event' && (
+                            <article className={`${style.announcementCard} ${style.announcementEventCard}`}>
+                                <div className={style.announcementHeader}>
+                                    <span className={style.eventIcon}><Info /></span>
+                                    <h3 className={style.eventTitleCard}> {announcement.type} {announcement.homeTeam} VS {announcement.awayTeam}</h3>
+                                </div>
+                                <div className={style.announcementBody}>
+                                    <p className={style.announcementEventTitle}>{announcement.title}</p>
+                                </div>
+                            </article>
+                        )}
+                    </Fragment>
+                ))}
+                {announcements.length === 0 && !isLoading && <p className={style.announcementDisclaimer}>No announcements at this time</p>}
+            </section>
+            <section className={style.upcomingSection}>
+                <h2 className={style.upcomingTitle}>Upcoming Games</h2>
+                <div className={style.filterContainer}>
                     <TeamButton 
                         team={'All'}
                         setTeam={setSelectedTeam}
@@ -150,43 +165,46 @@ const Home = () => {
                         />
                     ))}
                 </div>
-            </section>
-            <section className="my-3">
-                <h3 className="mb-3">upcoming Games</h3>
-                {isLoading && <p>Loading games...</p>}
-                {error && <p className="text-danger">{error}</p>}
-                {!isLoading && filteredUpcomingGames.length === 0 && (
-                    <p className="text-muted">No games for this team</p>
-                )}
-                <div className="d-flex flex-column gap-3">
-                    {filteredUpcomingGames.map(game => (
-                        <article className="card shadow-sm" key={game.id}>
-                            <div className="card-body">
-                                <h5 className="card-title fw-bold">
-                                    {game.homeTeam} vs {game.awayTeam}
-                                </h5>
-                                <p className="card-text mb-1">
-                                    <strong>Date:</strong>{game.date.toDate().toLocaleDateString()}
+                <div className={style.gamesGrid}>
+                    {isLoadingGames && <p className={style.statusText}>Loading games...</p>}
+                    {error && <p className={style.errorText}>{error}</p>}
+                    {!isLoadingGames && filteredUpcomingGames.length === 0 && (
+                        <p className={style.noGamesText}>No games for this team</p>
+                    )}
+
+                    {!isLoadingGames && filteredUpcomingGames.map(game => (
+                        <article className={style.gameCard} key={game.id}>
+                            <h3 className={style.gameCardTitle}>{game.homeTeam} vs {game.awayTeam}</h3>
+
+                            <div className={style.gameInfoRow}>
+                                <span className={style.infoIcon}><Calendar1 size={18}/></span>
+                                <p className={style.infoText}>
+                                    {game.date.toDate().toLocaleString('en-US', { weekday: 'short', month: 'short', day: 'numeric'})} - {game.time}
                                 </p>
-                                <p className="card-text mb-1">
-                                    <strong>Location:</strong>{game.location.name}
-                                </p>
-                                <p className="card-text mb-1">
-                                    <strong>Address:</strong>{game.location.address}
-                                </p>
-                                <button><Link to={`/games/${game.id}`}>See Details</Link></button>
                             </div>
+
+                            <div className={style.gameInfoRow}>
+                                <span className={style.infoIcon}><MapPin size={18}/></span>
+                                <p className={style.infoText}>{game.location.name}</p>
+                            </div>
+
+                            <Link 
+                                to={`/games/${game.id}`}
+                                className={style.detailsBtn}
+                            >
+                                See Details <ArrowRight size={16} />
+                            </Link>
                         </article>
                     ))}
                 </div>
             </section>
             
-            <div className="card">
-                <div className="card-header fw-bold">Contact</div>
-                <div className="card-body">
-                    <p className="mb-1"><strong>League Coordinator:</strong>Michael Randal</p>
-                    <p className="mb-0"><strong>Phone:</strong>(630) 690-8132</p>
-                    <p className="mb-0"><strong>League Director:</strong>Tom Denton</p>
+            <div className={style.contactCard}>
+                <div className={style.contactHeader}>Contact Information</div>
+                <div className={style.contactBody}>
+                    <p><strong>League Coordinator:</strong>Michael Randal</p>
+                    <p><strong>Phone:</strong>(630) 690-8132</p>
+                    <p><strong>League Director:</strong>Tom Denton</p>
                 </div>
             </div>
         </div>

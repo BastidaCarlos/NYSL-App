@@ -3,7 +3,10 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, db, signOut } from "../utilities/firebase";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
-import { sendPasswordResetEmail } from "firebase/auth/web-extension";
+import { sendPasswordResetEmail } from "firebase/auth";
+// Imports Styles and Icons
+import { User, Mail, Shield, LockKeyhole, LogOut } from "lucide-react";
+import style from '../styles/Profile.module.css'
 
 const Profile = () => {
     const [team, setTeam] = useState('');
@@ -72,61 +75,109 @@ const Profile = () => {
     if (loading) return <p>Loading...</p> 
     if (isLoading && !userData) return <p>Loading profile...</p> 
 
+    const displayRole = userData?.rol === 'familiar' ? 'Family Member' : 'Player';
+
     return (
-        <div className="container py-5">
-            <h1>{userData?.name}</h1>
-            <h5>Team {userData?.team} - {userData?.rol}</h5>
-            <p><span>Name:</span></p>
-            <h3>{userData?.name}</h3>
-            <p><span>Email:</span></p>
-            <h3>{userData?.email}</h3>
-            <p><span>Team:</span></p>
-            <h3>{userData?.team}</h3>
-            {userData?.rol === 'familiar' && (
-                <div>
-                    <label htmlFor="team">Team</label>
-                    <select
-                        id="team"
-                        name="team"
-                        value={team}
-                        onChange={(e) => setTeam(e.target.value)}
-                        disabled={isLoading}
-                    >
-                        <option value="" disabled hidden>Select a team</option>
-                        <option value="U1">U1</option>
-                        <option value="U2">U2</option>
-                        <option value="U3">U3</option>
-                        <option value="U4">U4</option>
-                        <option value="U5">U5</option>
-                        <option value="U6">U6</option>
-                    </select>
-                    <button
-                        onClick={handleTeamUpdate}
-                        disabled={isLoading || !team}
-                    >
-                        Save
-                    </button>
+        <div className={style.profileContainer}>
+            <div className={style.profileHeader}>
+                <h1 className={style.profileMainName}>{userData?.name || 'User Name'}</h1>
+                <p className={style.profileSubBadge}>
+                    Team {userData?.team || 'N/A'} - {displayRole}
+                </p>
+            </div>
+
+            <div className={style.profileCard}>
+                <div className={style.profileRow}>
+                    <div className={style.rowLeft}>
+                        <span className={style.fieldIcon}><User size={20} /></span>
+                        <span className={style.fieldLabel}>Name</span>
+                    </div>
+                    <div className={style.rowRigth}>
+                        <span className={style.fieldValue}>{userData?.name}</span>
+                    </div>
                 </div>
-            )}            
 
-            <h3>Password:</h3>
-            <button 
-                onClick={handlePasswordChange}
+                <div className={style.profileRow}>
+                    <div className={style.rowLeft}>
+                        <span className={style.fieldIcon}><Mail size={20} /></span>
+                        <span className={style.fieldLabel}>Email</span>
+                    </div>
+                    <div className={style.rowRigth}>
+                        <span className={style.fieldValue}>{userData?.email}</span>
+                    </div>
+                </div>
+
+                <div className={style.profileRowColumn}>
+                    <div className={style.profileRowTop}>
+                        <div className={style.rowLeft}>
+                            <span className={style.fieldIcon}><Shield size={20} /></span>
+                            <span className={style.fieldLabel}>Team</span>
+                        </div>
+                        <div className={style.rowRight}>
+                            <span className={style.fieldValue}>
+                                {userData?.team ? `Current: ${userData.team}` : 'No team'}
+                            </span>
+                        </div>
+                    </div>
+                    
+                    {userData?.rol === 'familiar' && (
+                        <div className={style.teamEditContainer}>
+                            <select
+                                id="team"
+                                name="team"
+                                value={team}
+                                onChange={(e) => setTeam(e.target.value)}
+                                disabled={isLoading}
+                                className={style.teamSelect}
+                            >
+                                <option value="" disabled hidden>Select a team</option>
+                                <option value="U1">U1</option>
+                                <option value="U2">U2</option>
+                                <option value="U3">U3</option>
+                                <option value="U4">U4</option>
+                                <option value="U5">U5</option>
+                                <option value="U6">U6</option>
+                            </select>
+                            <button
+                                type="button"
+                                onClick={handleTeamUpdate}
+                                disabled={isLoading || !team || team === userData?.team}
+                                className={style.saveTeamBtn}
+                            >
+                                {isLoading ? 'Saving...' : 'Save'}
+                            </button>
+                        </div>
+                    )}
+                </div>
+
+                <div className={style.profileRow}>
+                    <div className={style.rowLeft}>
+                        <span className={style.fieldIcon}><LockKeyhole size={20} /></span>
+                        <span className={style.fieldLabel}>Password</span>
+                    </div>
+                    <div className={style.rowRigth}>
+                        <button
+                            type="button"
+                            onClick={handlePasswordChange}
+                            className={style.changePasswordBtn}
+                        >
+                            Change
+                        </button>
+                    </div>
+                </div>
+            </div>
+            {error && <p className={style.errorText}>{error}</p>}
+
+            <button
+                type="button"
+                className={style.logoutButton}
+                onClick={handleSignOut}
             >
-                Change
+                <LogOut size={20} />
+                <span>Log out</span>
             </button>
-            {error && (<p>{error}</p>)}
-
-                <button 
-                    type="button" 
-                    className="btn btn-outline-danger px-4 rounded-pill fw-semibold"
-                    onClick={handleSignOut}
-                >
-                    Sign Out
-                </button>
         </div>
-
-    )
-}
+    );
+};
 
 export default Profile;
