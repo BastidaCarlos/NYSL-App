@@ -263,10 +263,10 @@ const AdminGames = () => {
                     </div>
 
                     <div className={style.formGroup}>
-                        <label htmlFor="location">Location</label>
+                        <label htmlFor="locationId">Location</label>
                         <select
-                            id="location"
-                            name="location"
+                            id="locationId"
+                            name="locationId"
                             className={style.inputField}
                             value={form.locationId}
                             onChange={handleChange}
@@ -280,10 +280,10 @@ const AdminGames = () => {
                     </div>
                     
                     <div className={style.formGroup}>
-                        <label htmlFor="referee">Referee</label>
+                        <label htmlFor="refereeId">Referee</label>
                         <select
-                            id="referee"
-                            name="referee"
+                            id="refereeId"
+                            name="refereeId"
                             className={style.inputField}
                             value={form.refereeId}
                             onChange={handleChange}
